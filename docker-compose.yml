@@ -1,0 +1,16 @@
+# terminal-> docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
+# parar o banco terminal vs-code-> docker stop api-solid-pg
+#deletar o banco terminal vs-code-> docker rm api-solid-pg
+#subir novo banco terminal vs-code-> docker compose up -d
+
+version: '3'
+
+services:
+ api-solid-pg:
+  image: bitnami/postgresql
+  ports:
+   - 5432:5432
+  environment:
+   - POSTGRESQL_USERNAME=docker
+   - POSTGRESQL_PASSWORD=docker
+   - POSTGRESQL_DATABASE=apisolid
