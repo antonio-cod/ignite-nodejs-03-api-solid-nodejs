@@ -1,10 +1,10 @@
 import { CheckInRepository } from "@/repositories/check-ins-repository";
 import { GymsRepository } from "@/repositories/gyms-repository";
-import { ChekIn } from "@prisma/client";
-import { ResourceNotFoundEror } from "./erros/resource-not-found-error";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates";
-import { MaxDistanceError } from "./erros/max-distance-error";
-import { MaxNumberOfCheckInsError } from "./erros/max-number--of-check-ins-error";
+import { CheckIn } from "@prisma/client";
+import { MaxDistanceError } from "./errors/max-distance-error";
+import { MaxNumberOfCheckInsError } from "./errors/max-number--of-check-ins-error";
+import { ResourceNotFoundEror } from "./errors/resource-not-found-error";
 
 
 interface CheckInUseCaseRequest {
@@ -15,7 +15,7 @@ interface CheckInUseCaseRequest {
 }
 
 interface CheckInUseCaseResponse {
- chekIn: ChekIn
+ checkIn: CheckIn
 }
 
 export class CheckInUseCase {
@@ -59,13 +59,13 @@ async execute({
       throw new MaxNumberOfCheckInsError()
     }
     
-    const chekIn = await this.checkInsRepository.create({
+    const checkIn = await this.checkInsRepository.create({
     gym_id: gymId,
     user_id: userId,
   })
 
   return {
-    chekIn,
+    checkIn,
   }
  }
 }

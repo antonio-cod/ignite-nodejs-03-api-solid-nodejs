@@ -1,8 +1,8 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { expect, describe, it, beforeEach } from 'vitest'
-import { AuthenticateUseCase } from './authenticate'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialError } from './erros/invalid-credentials-error'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { AuthenticateUseCase } from './authenticate'
+import { InvalidCredentialError } from './errors/invalid-credentials-error'
 
 //Teste Unitarios
 let usersRepository: InMemoryUsersRepository

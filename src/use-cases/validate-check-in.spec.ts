@@ -1,9 +1,7 @@
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
-import { Decimal } from '@prisma/client/runtime/library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { ResourceNotFoundEror } from './errors/resource-not-found-error'
 import { ValidateCheckInUseCase } from './validate-check-in'
-import { ResourceNotFoundEror } from './erros/resource-not-found-error'
 
 
 //Teste Unitarios
