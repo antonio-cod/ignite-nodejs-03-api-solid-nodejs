@@ -3,8 +3,8 @@ import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-
 import { Decimal } from '@prisma/client/runtime/library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { CheckInUseCase } from './check-in'
-import { MaxNumberOfCheckInsError } from './erros/max-number--of-check-ins-error'
-import { MaxDistanceError } from './erros/max-distance-error'
+import { MaxDistanceError } from './errors/max-distance-error'
+import { MaxNumberOfCheckInsError } from './errors/max-number--of-check-ins-error'
 
 
 //Teste Unitarios
@@ -36,14 +36,14 @@ describe('Check-in Use Case', () => {
   })
   
   it('should be able to check in', async () => {    
-    const { chekIn } = await sut.execute({
+    const { checkIn } = await sut.execute({
      gymId: 'gym-01',
      userId: 'user-01',
      userLatitude: -13.649202,
      userLongitude: -57.9057915,
     })
   
-    expect(chekIn.id).toEqual(expect.any(String))
+    expect(checkIn.id).toEqual(expect.any(String))
   }) 
 
   it('should not be able to check in twice in the same day', async () => {
@@ -78,14 +78,14 @@ describe('Check-in Use Case', () => {
 
     vi.setSystemTime(new Date(2024, 0, 10, 8, 0, 0))
 
-    const { chekIn } = await sut.execute({
+    const { checkIn } = await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
       userLatitude: -13.649202,
       userLongitude: -57.9057915,
       })
    
-      expect(chekIn.id).toEqual(expect.any(String))
+      expect(checkIn.id).toEqual(expect.any(String))
   })
 
   it('should not be able to check in on distant gym', async () => {     

@@ -1,8 +1,8 @@
-import { ChekIn } from "@prisma/client";
-import { ResourceNotFoundEror } from "./erros/resource-not-found-error";
 import { CheckInRepository } from "@/repositories/check-ins-repository";
+import { ChekIn } from "@prisma/client";
 import dayjs from "dayjs";
-import { LateCheckInValidateError } from "./erros/late-check-in-validation-error";
+import { LateCheckInValidateError } from "./errors/late-check-in-validation-error";
+import { ResourceNotFoundEror } from "./errors/resource-not-found-error";
 
 
 interface ValidateCheckInUseCaseRequest {

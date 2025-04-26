@@ -1,8 +1,8 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { expect, describe, it, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { ResourceNotFoundEror } from './errors/resource-not-found-error'
 import { GetUserProfileUseCase } from './get-user-profile'
-import { ResourceNotFoundEror } from './erros/resource-not-found-error'
 
 //Teste Unitarios
 let usersRepository: InMemoryUsersRepository

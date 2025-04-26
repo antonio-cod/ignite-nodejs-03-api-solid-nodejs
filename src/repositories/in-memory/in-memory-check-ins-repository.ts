@@ -1,18 +1,18 @@
-import { Prisma, ChekIn } from "@prisma/client";
+import { Prisma, CheckIn } from "@prisma/client";
 import { CheckInRepository } from "../check-ins-repository";
 import { randomUUID } from "node:crypto";
 import dayjs from "dayjs";
 
 export class InMemoryCheckInsRepository implements CheckInRepository {
-  public items: ChekIn[] = []
+  public items: CheckIn[] = []
   
   async findById(id: string){
-    const chekIn = this.items.find((item) => item.id == id)
+    const checkIn = this.items.find((item) => item.id == id)
 
-    if (!chekIn) {
+    if (!checkIn) {
       return null
     }
-    return chekIn
+    return checkIn
     
   }
 
@@ -20,12 +20,12 @@ export class InMemoryCheckInsRepository implements CheckInRepository {
     const startOfTheDay = dayjs(date).startOf('date')
     const endOfTheDay = dayjs(date).endOf('date')
     
-    const checkInOnSameDate = this.items.find((chekIn) => {
-      const checkInDate = dayjs(chekIn.created_at)
+    const checkInOnSameDate = this.items.find((checkIn) => {
+      const checkInDate = dayjs(checkIn.created_at)
       const isOnSameDate =
       checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay)
       
-      return chekIn.user_id == userId && isOnSameDate
+      return checkIn.user_id === userId && isOnSameDate
     })
     
     if (!checkInOnSameDate) {
@@ -40,13 +40,12 @@ export class InMemoryCheckInsRepository implements CheckInRepository {
     .filter((item) => item.user_id == userId)
     .slice((page - 1) * 20, page *20)
   }
-  async countByUserId(userId: string){
-    return this.items
-    .filter((item) => item.user_id == userId).length
+  async countByUserId(userId: string) {
+    return this.items.filter((checkIn) => checkIn.user_id === userId).length
   }
 
-  async create(data: Prisma.ChekInUncheckedCreateInput){
-    const chekIn = {
+  async create(data: Prisma.CheckInUncheckedCreateInput){
+    const checkIn = {
       id: randomUUID(),
       user_id: data.user_id,
       gym_id: data.gym_id,
@@ -54,17 +53,17 @@ export class InMemoryCheckInsRepository implements CheckInRepository {
       created_at: new Date(),
     }
 
-    this.items.push(chekIn)
-    return chekIn
+    this.items.push(checkIn)
+    return checkIn
   }
 
-  async save(chekIn: ChekIn) {
-    const chekInIndex = this.items.findIndex(item => item.id == chekIn.id)
+  async save(checkIn: CheckIn) {
+    const chekInIndex = this.items.findIndex(item => item.id == checkIn.id)
   
     if(chekInIndex >= 0) {
-      this.items[chekInIndex] = chekIn
+      this.items[chekInIndex] = checkIn
     }
 
-    return chekIn
+    return checkIn
   }
 }
