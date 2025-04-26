@@ -21,7 +21,7 @@ describe('Check-in Use Case', () => {
   
     await gymsRepository.create({
         id: 'gym-01',
-        title: 'JavaScripit Gym',
+        title: 'JavaScript Gym',
         description: '',
         phone: '',
         latitude: -13.649202,
